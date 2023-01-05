@@ -1,29 +1,27 @@
-import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { IsNotEmpty, IsPhoneNumber } from 'class-validator';
+import { CommonEntity } from 'src/common/entities/common.entity';
+import { Column, Entity } from 'typeorm';
 
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class User extends CommonEntity {
+  @IsNotEmpty()
   @Column()
   email: string;
 
+  @IsNotEmpty()
   @Column()
   password: string;
 
-  @CreateDateColumn({ type: 'timestamptz' })
-  createdAt: Date;
+  @IsNotEmpty()
+  @Column()
+  name: string;
 
-  @UpdateDateColumn({ type: 'timestamptz' })
-  updatedAt: Date;
+  @IsNotEmpty()
+  @Column()
+  nickname: string;
 
-  @DeleteDateColumn({ type: 'timestamptz' })
-  deletedAt: Date;
+  @IsNotEmpty()
+  @IsPhoneNumber('KR')
+  @Column()
+  phoneNumber: string;
 }
